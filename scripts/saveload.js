@@ -34,7 +34,7 @@ function saveSelection() {
 function loadSelection() {
     window.selCases = JSON.parse(loadLocal('ollSelection', '[31,32]'));
     if (window.selCases == null)
-        window.selCases = [31,32];
+        window.selCases = [];
     saveSelection();
 }
 
