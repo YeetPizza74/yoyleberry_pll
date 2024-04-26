@@ -114,17 +114,14 @@ function renderSelection()
 
     s += "<table class='olllayout'>";
     //s += "<tr><a onclick='selectAllNone()'>select all or none</a>";
-    s += "<tr><td class='ollgrouptdUnsel' onclick='selectAllNone()' colspan='6'><b>All Cases (57)</b> | selected: <span id='csi'></span></td></tr>";
+    s += "<tr><td class='ollgrouptdUnsel' onclick='selectAllNone()' colspan='6'><b>All Cases (23)</b> | selected: <span id='csi'></span></td></tr>";
 
-    s += makeTr42("P-Shapes", "T-Shapes");
-    s += makeTr42("I-Shapes", "Squares");
-    s += makeTr42("Fish-Shapes", "C-Shapes");
-    s += makeTr42("Knight Move Shapes", "W-Shapes");
-    s += makeTr42("Awkward Shapes", "Corners Correct, Edges Flipped");
-    s += makeTrNormal("L-Shapes");
-    s += makeTrNormal("Lightning Bolts");
-    s += makeTrNormal("All Edges Oriented Correctly");
-    s += makeTrNormal("No Edges Flipped Correctly");
+    s += makeTrNormal("2S");
+    s += makeTrNormal("3C");
+    s += makeTrNormal("2S 2S");
+    s += makeTrNormal("2S 3C");
+    s += makeTrNormal("4C");
+    s += makeTrNormal("5C");
 
     s += "</table>";
     document.getElementById("cases_selection").innerHTML = s;

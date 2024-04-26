@@ -17,7 +17,7 @@ function showScramble()
         document.getElementById("selInfo").innerHTML = "";
     }
     else {
-        s = "scramble: " + generateScramble();
+        s = "scramble: " + inverse_scramble(generateScramble());
         window.allowStartingTimer = true;
     }
 
@@ -71,14 +71,12 @@ function generateScramble()
         window.recapArray.splice(index, 1);
 
     }
-    var alg = inverse_scramble(randomElement(window.ollMap[caseNum]));
-    var rotation = randomElement(["", "y", "y2", "y'"]);
-    var finalAlg = applyRotationForAlgorithm(alg, rotation);
+    var alg = randomElement(window.ollMap[caseNum]);
 
-    window.lastScramble = finalAlg;
+    window.lastScramble = alg;
     window.lastCase = caseNum;
 
-    return finalAlg;
+    return alg;
 }
 
 // http://stackoverflow.com/questions/15604140/replace-multiple-strings-with-multiple-other-strings
@@ -108,6 +106,13 @@ function applyRotationForAlgorithm(alg, rot)
     return replaceAll(alg, mapObj);
 }
 
+function reverseString(str) {
+    if (str === "")
+      return "";
+    else
+      return reverseString(str.substr(1)) + str.charAt(0);
+  }
+
 function inverse_scramble(s)
 {
 	// deleting parantheses and double spaces
@@ -119,21 +124,36 @@ function inverse_scramble(s)
             s = s.replaceAll("  ", " ");
 
     var arr = s.split(" ");
+    var alg = ""
     var result = "";
-    for (var i = 0; i < arr.length; i++)
+    for (var b = 0; b < arr.length; b++)
     {
-        var it = arr[i];
-        if (it.length == 0)
-            continue;
-        if (it[it.length - 1] == '2')
-            result = it + " " + result;
-        else if (it[it.length - 1] == '\'')
-            result = it.substr(0, it.length - 1) + " " + result;
-        else
-            result = it + "' " + result;
+        i = arr[b]
+        if (i === "U")
+            alg += " 'U"
+        else if (i === "U2")
+            alg += " '2U"
+        else if (i === "U3")
+            alg += " 3U"
+        else if (i === "U'")
+            alg += " U"
+        else if (i === "U2'")
+            alg += " 2U"
+        else if (i === "D")
+            alg += " 'D"
+        else if (i === "D2")
+            alg += " '2D"
+        else if (i === "D3")
+            alg += " 3D"
+        else if (i === "D'")
+            alg += " D"
+        else if (i === "D2'")
+            alg += " 2D"
+        else if (i === "R")
+            alg += " R"
     }
 
-    return result.substr(0, result.length-1);
+    return reverseString(alg);
 }
 
 /*        TIMER        */
